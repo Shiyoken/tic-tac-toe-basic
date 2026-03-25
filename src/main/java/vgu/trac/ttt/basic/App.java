@@ -17,18 +17,20 @@ public class App {
         else {
             System.out.println("You need to choose a player to go first");
         }
-        Board board = new Board();
-        Player human = new Player();
+        Board board = new Board_1D();
+        Player human = new Human();
         Computer computer = new Computer();
-        
         boolean gameActive = true;
-        Player currentPlayer = new Player();
+        
+        Player currentPlayer = null;
+
         if (firstPlayer == 1){
-                currentPlayer = human;
+            currentPlayer = human;
         }
         else if (firstPlayer == 2){
             currentPlayer = computer;
         }
+        
         while (gameActive) {
             board.printBoard();
             currentPlayer.makeMove(board);
@@ -36,7 +38,7 @@ public class App {
             int winner = board.isWin();
             if (winner != 0 ){
                 board.printBoard();
-                System.out.println("Player" + winner + "wins");
+                System.out.println("Player" + winner + " wins");
                 gameActive = false;
             } else if (board.isDraw()){
                 board.printBoard();
