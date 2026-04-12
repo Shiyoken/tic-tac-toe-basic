@@ -1,7 +1,11 @@
 package vgu.trac.ttt.basic;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 public class Board_2D extends Board{
     private int[][] board;
+    private PrintStream printer;
 
     public Board_2D() {
         board = new int[3][3];
@@ -10,28 +14,74 @@ public class Board_2D extends Board{
                 board[i][j] = 0;
             }
         }
+        printer = new PrintStream(System.out);
     }
+
+    public Board_2D(int arr[]) {
+        board = new int[3][3];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                board[i][j] = arr[3 * i + j];
+            }
+        }
+    }
+
+    // For testing
+    public Board_2D(ByteArrayOutputStream out) {
+        board = new int[3][3];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                board[i][j] = 0;
+            }
+        }
+        printer = new PrintStream(out);
+        
+    }
+
+    // For testing 
+    public Board_2D(int arr[], ByteArrayOutputStream out) {
+        board = new int[3][3];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                board[i][j] = arr[3 * i + j];
+            }
+        }
+        printer = new PrintStream(out);
+    }
+
     public void printBoard() {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                System.out.print(" | " + board[i][j]);
+                printer.print(" | " + board[i][j]);
             }
-            System.out.print(" |");
-            System.out.println();
+            printer.print(" | ");
+            printer.println();
         }
     }
-    public int placeMove(int move, int player) {
+
+    public void placeMove(int move, int player) {
         int board_move = move - 1;
         int i = board_move / 3;
         int j = board_move % 3;
-        if (board_move < 0 || board_move > 8) {
-            return -1;
-        }
-        if (board[i][j] != 0){
-            return 0;
-        }
         board[i][j] = player;
-        return 1;
+
+    }
+
+    public boolean isValid(int move) {
+        if (move < 0  || move > 9) {
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean isEmpty(int move) {
+        int board_move = move - 1;
+        int i = board_move / 3;
+        int j = board_move % 3;
+        if (board[i][j] == 0) {
+            return true;
+        }
+        return false;
     }
 
     public int isWin() {
@@ -45,8 +95,7 @@ public class Board_2D extends Board{
         return 0;
     }
 
-
-    public boolean isDraw() {
+    public boolean isFull() {
         for (int i = 0; i < 3; i++){
             for (int j = 0; j < 3; j++){
                 if (board[i][j] == 0) {
@@ -57,4 +106,9 @@ public class Board_2D extends Board{
         return true;
     }
 
+    public int getCell(int move) {
+        int i = (move - 1) / 3;
+        int j = (move - 1) % 3;
+        return board[i][j];
+    }
 }
