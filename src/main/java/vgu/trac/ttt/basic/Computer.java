@@ -1,15 +1,14 @@
 package vgu.trac.ttt.basic;
 
 public class Computer extends Player {
-    private int i = 1;
+
     @Override
-    public void makeMove(Board board) {
-        System.out.println("Player2 turn");
-        for (int index = i ; index <= 9; index++){
-            if (board.placeMove(index, 2) == 1) {
-                break;
+    public int makeMove(Board board) {
+        for (int i = 1 ; i <= 9; i++){
+            if (board.isEmpty(i)) {
+                return i;
             }
         }
-        this.i++;
+        return -1;
     }
 }
