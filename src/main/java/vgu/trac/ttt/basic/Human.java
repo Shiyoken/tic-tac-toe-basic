@@ -1,4 +1,5 @@
 package vgu.trac.ttt.basic;
+import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.*;
@@ -16,16 +17,30 @@ public class Human extends Player {
         this.id = 1;
         keyboard = new Scanner(in);
     }
-    public int makeMove(Board board){
+
+    // 0 -> Format Error
+    // -2 -> quit the game
+    public int makeMove(Board board) {
         String move = keyboard.nextLine();
-        int moveInt = -1;
+        int moveInt  = -1;
         try {
             moveInt = Integer.parseInt(move);
+            if (moveInt == -2) {
+                return -1;
+            }
             return moveInt;
         } catch (NumberFormatException e) {
-            System.out.println("Please enter only numbers");
-            return moveInt;
-        } 
+            if (move.equals("q")) {
+                return -2;
+            }
+            else {
+                return 0;
+            }
+        // } catch (IOException ex) {
+        //     System.out.println("Unexpected exception when reading player");
+        //     return -2;
+        // }
+        }
     }
 
     //For testing
@@ -41,7 +56,7 @@ public class Human extends Player {
             }
             return moveInt;
         } catch (NumberFormatException e) {
-            System.out.println("Please enter only numbers");
+            System.out.println("Please, input a valid number [1-9]");
             return moveInt;
         }
     }
