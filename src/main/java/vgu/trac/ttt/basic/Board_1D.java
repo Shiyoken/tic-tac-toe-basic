@@ -1,6 +1,7 @@
 package vgu.trac.ttt.basic;
 
 import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 import java.io.PrintStream;
 
 public class Board_1D extends Board {
@@ -20,6 +21,15 @@ public class Board_1D extends Board {
         for (int i = 0; i < 9; i++) {
             board[i] = arr[i];
         }
+        printer = new PrintStream(System.out); 
+    }
+
+    public Board_1D(OutputStream out) {
+        board = new int[9];
+        for (int i = 0; i < 9; i++){
+            board[i] = 0;
+        }
+        printer = new PrintStream(out);
     }
 
     // For testing
@@ -29,7 +39,6 @@ public class Board_1D extends Board {
             board[i] = 0;
         }
         printer = new PrintStream(out);
-
     }
 
     // For testing output
