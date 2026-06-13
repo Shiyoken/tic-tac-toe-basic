@@ -1,6 +1,6 @@
 package vgu.trac.ttt.basic;
 
 
-abstract class Player {
-    abstract int makeMove(Board board);
+public abstract class Player {
+    public abstract int makeMove(Board board);
 }
