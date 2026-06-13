@@ -15,6 +15,13 @@ public class Board_1D extends Board {
         }
         printer = new PrintStream(System.out);
     }
+    public Board_1D(String boardState) {
+        board = new int[9];
+        for (int i = 0; i < 9; i++) {
+            board[i] = boardState.charAt(i) - '0';
+        }
+        printer = new PrintStream(System.out); 
+    }
 
     public Board_1D(int arr[]) {
         board = new int[9];
@@ -124,5 +131,21 @@ public class Board_1D extends Board {
 
     public int getCell(int move) {
         return board[move - 1];
+    }
+
+    @Override
+    public String boardState() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < board.length; i++) {
+            sb.append(board[i]);
+        }
+        return sb.toString();
+    }
+    @Override
+    public void setBoard(String boardState) {
+        for (int i = 0; i < 9; i++) {
+            board[i] = boardState.charAt(i) - '0';
+        }
+        printer = new PrintStream(System.out); 
     }
 }

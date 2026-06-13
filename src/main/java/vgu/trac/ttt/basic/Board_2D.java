@@ -121,4 +121,33 @@ public class Board_2D extends Board{
         int j = (move - 1) % 3;
         return board[i][j];
     }
+    
+    @Override
+    public String boardState() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                sb.append(board[i][j]);
+            }
+        }
+        return sb.toString();
+    }
+    @Override 
+    public void setBoard(String boardstate) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                board[i][j] = boardstate.charAt(3 * i + j) - '0';
+            }
+        } 
+    }
+
+    public Board_2D(String boardstate) {
+        board = new int[3][3];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                board[i][j] = boardstate.charAt(3 * i + j) - '0';
+            }
+        }
+        printer = new PrintStream(System.out); 
+    }
 }

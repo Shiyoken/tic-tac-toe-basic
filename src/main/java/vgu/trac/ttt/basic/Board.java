@@ -1,11 +1,14 @@
 package vgu.trac.ttt.basic;
 
-abstract class Board {
-    abstract void printBoard();
-    abstract void placeMove(int move, int player);
-    abstract int isWin();
-    abstract boolean isFull();
-    abstract boolean isEmpty(int move);
-    abstract boolean isValid(int move); 
-    abstract int getCell(int move);
+public abstract class Board {
+    public abstract void printBoard();
+    public abstract void placeMove(int move, int player);
+    public abstract int isWin();
+    public abstract boolean isFull();
+    public abstract boolean isEmpty(int move);
+    public abstract boolean isValid(int move); 
+    public abstract int getCell(int move);
+    
+    public abstract void setBoard(String boardState);
+    public abstract String boardState();
 }
